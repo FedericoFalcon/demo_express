@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const Server = require('../demo_express/models/server')
+const Server = require('./models/server')
 
 const startServer = new Server();
 
