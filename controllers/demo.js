@@ -22,9 +22,12 @@ const getOrigenNombre = (req, res) => {
     const {name} = req.params;
 
     axios.get(`https://api.nationalizea.io/?name=${name}`)
-    .then((response) => { // Response desestructurado
+    .then(({data,status,statusText}) => { // Response desestructurado
         res.status(200).json({
-            msg: response.data
+            data,
+            status,
+            statusText,
+            name
         });
     })
     .catch((error) => {
