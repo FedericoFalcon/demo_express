@@ -19,15 +19,15 @@ const getSeries = (req, res) => {
 }
 
 const getOrigenNombre = (req, res) => {
-    const {name} = req.params;
+    // const {name} = req.params;
 
-    axios.get(`https://api.nationalizea.io/?name=${name}`)
+    axios.get(`https://api.unsplash.com/search/photos?query=cabin&client_id=fnF9Fkh3knMKxgEmP0zg_R1ZCJEBGcMCFECd629Fwrw&per_page=10`)
     .then(({data,status,statusText}) => { // Response desestructurado
         res.status(200).json({
             data,
             status,
             statusText,
-            name
+            // name
         });
     })
     .catch((error) => {
