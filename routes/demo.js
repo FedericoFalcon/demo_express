@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getSeries, getPeliculas, getPelicula, getOrigenNombre } = require('../controllers/demo');
+const { getSeries, getPeliculas, getPelicula, getNovedades } = require('../controllers/demo');
 
 const Rutas = Router();
 
@@ -9,6 +9,6 @@ Rutas.get('/pelicula/:id', getPelicula)
 
 Rutas.get('/series', getSeries)
 
-Rutas.get('/nombre/', getOrigenNombre)
+Rutas.get('/novedades/', getNovedades)
 
 module.exports = Rutas;
