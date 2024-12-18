@@ -9,6 +9,6 @@ Rutas.get('/pelicula/:id', getPelicula)
 
 Rutas.get('/series', getSeries)
 
-Rutas.get('/nombre/:name', getOrigenNombre)
+Rutas.get('/nombre/', getOrigenNombre)
 
 module.exports = Rutas;
