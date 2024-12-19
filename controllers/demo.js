@@ -1,18 +1,39 @@
 const axios = require('axios');
 
-const getPeliculas = (req, res) => {
-    const {anio, ...resto} = req.query;
-    console.log(anio, resto);
-    
-    res.status(200).json({peliculas: 'tales pelis'});
-}
+const getInteriores = async (req, res) => {
+    const clientId = process.env.API_KEY_UNSPLASH;  
+    const url = `https://api.unsplash.com/search/photos?query=cozy+cabin+interior&client_id=${clientId}&per_page=10&page=1`;
 
-const getPelicula = (req, res) => {
-    const {id} =  req.params;
-    console.log(id);
-    
-    res.json({pelicula: `Pelicula con ID: ${id}`});
-}
+    try {
+        const response = await axios.get(url);
+
+        const fotos = response.data.results; 
+
+        const selectedImages = [];
+        while (selectedImages.length < 4) {
+            const randomIndex = Math.floor(Math.random() * fotos.length);
+            const image = fotos[randomIndex];
+            if (!selectedImages.includes(image)) {
+                selectedImages.push(image);
+            }
+        }
+
+        const imagenesCabanas = selectedImages.map(image => ({
+            'image': image.urls.small, 
+            'alt_description': image.alt_description,
+        }));
+
+        res.status(200).json({
+            'interiores': imagenesCabanas, 
+        });
+
+    } catch (error) {
+        console.error('Error al obtener imágenes de interiores de cabañas:', error);
+        res.status(400).json({
+            err_msg: 'Error inesperado al obtener las imágenes de interiores de cabañas',
+        });
+    }
+};
 
 const getAlquileres = async (req, res) => {
     const clientId = process.env.API_KEY_UNSPLASH;
@@ -22,7 +43,7 @@ const getAlquileres = async (req, res) => {
     }
 
     try {
-        // Realizo todas las solicitudes juntas
+        // Hago todas las solicitudes juntas
         const responses = await Promise.all(urls.map(url => axios.get(url)));
 
         const cabanias = [];
@@ -157,8 +178,7 @@ const getNovedades = (req, res) => {
 }
 
 module.exports = {
-    getPeliculas,
     getAlquileres,
-    getPelicula,
-    getNovedades
+    getNovedades,
+    getInteriores
 }
