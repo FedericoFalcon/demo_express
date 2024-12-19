@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getSeries, getPeliculas, getPelicula, getNovedades } = require('../controllers/demo');
+const { getAlquileres, getPeliculas, getPelicula, getNovedades } = require('../controllers/demo');
 
 const Rutas = Router();
 
@@ -7,7 +7,7 @@ Rutas.get('/peliculas', getPeliculas)
 
 Rutas.get('/pelicula/:id', getPelicula)
 
-Rutas.get('/series', getSeries)
+Rutas.get('/alquileres/', getAlquileres)
 
 Rutas.get('/novedades/', getNovedades)
 
